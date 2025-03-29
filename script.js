@@ -25,54 +25,60 @@
                 }
             }
         },
-        // ... other configurations
+        // Add more configurations here
     ];
 
     // Function to initialize the video player
     async function init() {
-        const id = getQueryParameter('id');
-        const config = videoConfigs.find(cfg => cfg.id === id);
+        const id = getQueryParameter('id'); // Get the video ID from the query string
+        const config = videoConfigs.find(cfg => cfg.id === id); // Find matching configuration
 
         if (!config) {
             console.error('No valid configuration found for the provided id.');
+            alert('Invalid video configuration. Please check the URL.'); // Provide user feedback
             return;
         }
 
         const video = document.getElementById('video');
-        const ui = video['ui'];
+        const ui = video['ui']; // Access Shaka Player UI
         ui.configure({
             seekBarColors: {
                 base: 'rgba(255,255,255,.2)',
                 buffered: 'rgba(255,255,255,.4)',
-                played: 'rgb(255,0,0)',
+                played: 'rgb(255,0,0)', // Red color for the played portion
             }
         });
 
         const controls = ui.getControls();
         const player = controls.getPlayer();
 
-        // Apply DRM configuration to the player
+        // Apply DRM configuration
         player.configure({
             drm: config.drmConfig
         });
 
         try {
+            // Load the manifest URI and attempt to autoplay
             await player.load(config.manifestUri);
-            // Mute the video to allow autoplay
-            video.muted = true;
-            await video.play(); // Attempt to autoplay
+            video.muted = true; // Mute the video for autoplay
+            await video.play();
         } catch (error) {
             console.error('Error loading manifest or autoplay failed:', error);
+            alert('Failed to load video. Please try again later.');
         }
 
-        // Replace jQuery with vanilla JavaScript for modifying button text
-        document.querySelectorAll('.shaka-overflow-menu-button').forEach(button => {
-            button.textContent = 'settings';
+        // Customize UI elements (button text changes)
+        const settingsButtons = document.querySelectorAll('.shaka-overflow-menu-button');
+        settingsButtons.forEach(button => {
+            button.textContent = 'Settings'; // Update button text
         });
-        document.querySelectorAll('.shaka-back-to-overflow-button .material-icons-round').forEach(icon => {
-            icon.textContent = 'arrow_back_ios_new';
+
+        const backButtons = document.querySelectorAll('.shaka-back-to-overflow-button .material-icons-round');
+        backButtons.forEach(icon => {
+            icon.textContent = 'arrow_back_ios_new'; // Update back button icon
         });
     }
 
+    // Initialize the player when the Shaka UI is loaded
     document.addEventListener('shaka-ui-loaded', init);
 })();
