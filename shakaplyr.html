@@ -1,111 +1,114 @@
 <!DOCTYPE html>
-
-
+<html lang="en">
 
 <head>
- 
- 
-  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>B4X SPORTS</title>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.6/shaka-player.ui.min.js' crossorigin='anonymous'></script>
+  
+  <!-- Shaka Player Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.6/shaka-player.ui.min.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.6/controls.min.css" crossorigin="anonymous">
-  
 
-<body bgcolor='black' style='margin:0' oncontextmenu='return false' onkeydown='return false' onmousedown='return false'>
-    <style>
-    
-.shaka-spinner-container { display: none; }
-  .video-fill video {
-        object-fit: fill cover;
-      }
-  
-   /* Overflow menu style */
+  <!-- jQuery (if needed) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+5hb7Q4opbmU3RmDtugQgfppdMke7s9URDEx3P" crossorigin="anonymous"></script>
 
-.shaka-overflow-menu {
-    background-color: rgb(35, 35, 35);
-    color: rgb(255, 255, 255);
-}
+  <!-- CSS for Styling -->
+  <style>
+    body {
+      background-color: black;
+      margin: 0;
+    }
 
-.shaka-overflow-menu button:hover {
-    background-color: rgb(45, 45, 45);
-}
+    .shaka-spinner-container {
+      display: none;
+    }
 
-.shaka-overflow-button-label {
-    color: rgb(245, 245, 245);
-}
+    .video-fill video {
+      object-fit: cover;
+    }
 
-.shaka-current-selection-span {
-    color: rgb(202, 202, 202);
-}
+    /* Overflow menu style */
+    .shaka-overflow-menu {
+      background-color: rgb(35, 35, 35);
+      color: rgb(255, 255, 255);
+    }
 
-.material-icons-round {
-    color: rgb(230, 230, 230);
-}
+    .shaka-overflow-menu button:hover {
+      background-color: rgb(45, 45, 45);
+    }
 
-/* Overflow sub menu style */
+    .shaka-overflow-button-label,
+    .shaka-current-selection-span,
+    .material-icons-round {
+      color: rgb(230, 230, 230);
+    }
 
-.shaka-settings-menu {
-    background-color: rgb(35, 35, 35);
-    color: rgb(255, 255, 255);
-}
+    .shaka-settings-menu {
+      background-color: rgb(35, 35, 35);
+      color: rgb(255, 255, 255);
+    }
 
-.shaka-settings-menu button {
-    color: rgb(255, 255, 255);
-}
+    .shaka-settings-menu button {
+      color: rgb(255, 255, 255);
+    }
 
-.shaka-settings-menu button:hover {
-    background-color: rgb(45, 45, 45);
+    .shaka-settings-menu button:hover {
+      background-color: rgb(45, 45, 45);
+    }
 
-}
+    .shaka-bottom-controls {
+      display: flex;
+      flex-direction: column-reverse;
+    }
 
-.shaka-bottom-controls {
-  display: flex;
-  flex-direction: column-reverse;
-}
+    #tglogo {
+      position: absolute;
+      right: 80px;
+      top: 30px;
+      height: 60px;
+      width: 100px;
+    }
 
+    .join-us {
+      position: absolute;
+      z-index: 100;
+      top: 6px;
+      left: 5px;
+      height: 30px;
+      width: 100px;
+      color: rgb(204, 204, 204);
+      border: 2px solid rgb(204, 204, 204);
+      padding: 1px 0px;
+      border-radius: 2px;
+      text-align: center;
+    }
+  </style>
+</head>
 
+<body oncontextmenu="return false" onkeydown="return false" onmousedown="return false">
+  <div class="container video-fill" data-shaka-player-container style="position: absolute; z-index: -1; top: 0; left: 0; width: 100%; height: 100%;">
+    <video autoplay data-shaka-player id="video" poster="https://i.postimg.cc/2SvNpkFK/New-Project-81-38-FC63-E.png" style="width: 100%; height: 100%;"></video>
+    <img id="tglogo" src="https://i.postimg.cc/DwHRs3xd/New-Project-18-55-C22-AF.png" alt="Logo">
+  </div>
 
-#tglogo {
-position: absolute;
-right: 80px;
-top: 30px;
-height: 60px;
-width: 100px;
-} 
-</style>
+  <!-- Join Us Button -->
+  <a href="https://whatsapp.com/channel/0029Va6V441BqbrA2NZpkH2z" target="_blank" class="join-us">Join us</a>
 
+  <!-- Disable DevTools -->
+  <script disable-devtool-auto="" src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
 
-<script type="text/javascript">
-	
-$(document).ready(function() {
-	$('body').bind('cut copy paste', function (e) {
-		e.preventDefault();
-	})
-	$(".code").on("contextmenu", function(e) {
-		return false;
-	})
-})
+  <!-- Disable Copy/Paste -->
+  <script>
+    $(document).ready(function () {
+      $('body').on('cut copy paste', function (e) {
+        e.preventDefault();
+      });
+    });
+  </script>
 
-</script>
-
-
-<script disable-devtool-auto="" src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
-
-    <div class="container video-fill" data-shaka-player-container style='position:absolute;z-index: -1;top: 0;left: 0;width: 100%; height: 100%;object-fit:fill cover;'>
-      <video autoplay data-shaka-player id='video' poster="https://i.postimg.cc/2SvNpkFK/New-Project-81-38-FC63-E.png" style='width:100%;height:100%;'>
-
-</video>
-
-    
-<img id="tglogo" src="https://i.postimg.cc/DwHRs3xd/New-Project-18-55-C22-AF.png"> 
-<script src="script.js"></script>
-
-  <a href="https://whatsapp.com/channel/0029Va6V441BqbrA2NZpkH2z" target="_blank">
-<span style="position: absolute; z-index: 100; top: 6px; left: 5px; height: 30px; width: 100px; color: rgb(204, 204, 204); border: 2px solid rgb(204, 204, 204); padding: 1px 0px; border-radius: 2px; text-align: center;">
-Join us
-</span>
-</a>
-
-</script>
+  <!-- Custom Script -->
+  <script src="script.js"></script>
 </body>
+
 </html>
