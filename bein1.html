@@ -93,8 +93,8 @@
     document.addEventListener("DOMContentLoaded", () => {
       const streams = {
         1080p: "https://top1-cdnnew.newkso.ru/top1-cdn/WGVkNwnbxY/mono.m3u8",
-        720: "https://top1-cdnnew.newkso.ru/top1-cdn/W0svhc8oj7/mono.m3u8",
-          480: "https://top1-cdnnew.newkso.ru/top1-cdn/vTwenKA7UX/mono.m3u8",
+        720p: "https://top1-cdnnew.newkso.ru/top1-cdn/W0svhc8oj7/mono.m3u8",
+          480p: "https://top1-cdnnew.newkso.ru/top1-cdn/vTwenKA7UX/mono.m3u8",
        
 
       };
@@ -131,11 +131,11 @@
         langSwitcher.className = 'plyr__lang-switcher';
         
         langSwitcher.innerHTML = `
-          <button class="plyr__lang-btn">Hindi</button>
+          <button class="plyr__lang-btn">1080p</button>
           <div class="plyr__lang-options">
-            <div class="plyr__lang-option" data-lang="hindi">Hindi</div>
-            <div class="plyr__lang-option" data-lang="english">English</div>
-             <div class="plyr__lang-option" data-lang="panjabi">Hindi-1080p</div>
+            <div class="plyr__lang-option" data-lang="1080p">1080p</div>
+            <div class="plyr__lang-option" data-lang="720p">720p</div>
+             <div class="plyr__lang-option" data-lang="480p">480p</div>
             
           </div>
         `;
