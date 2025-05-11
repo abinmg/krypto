@@ -1,0 +1,127 @@
+
+<!DOCTYPE html><html><head>
+
+
+</head>
+<meta content='never' name='referrer'/>
+<body>
+<div class='main section' id='main'><div class='widget Blog' data-version='2' id='Blog1'>
+<div class='blog-posts hfeed container'>
+<article class='post-outer-container'>
+<div class='post-outer'>
+<div class='post'>
+<script type='application/ld+json'>{
+ </script>
+<div class='post-body entry-content float-container' id='post-body-524878018853878510'>
+ 
+<body>
+ 
+
+
+
+
+
+
+<iframe class="vidio" id="vidio" margin src="https://www.b4xsports.online/" scrolling="no" allow="encrypted-media;fullscreen" allow="accelerometer; gyroscope; #autoplay; encrypted-media; picture-in-picture;" controls="" frameborder="5; colour= 'green'" gesture="media" style="border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%; loading="lazy" name="myiFrame" sandbox="allow-forms allow-pointer-lock allow-same-origin allow-scripts" width="100%"></iframe>
+</div>
+<div class="konten-atas">
+
+
+
+
+
+
+<div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+  <!-- Konten di atas -->
+
+
+
+  
+	
+  <script>
+    var iframe = document.getElementById('vidio');
+    var offlineMessage = document.getElementById('offline-message');
+
+    iframe.addEventListener('load', function() {
+      // Fungsi ini akan dipanggil saat iframe selesai dimuat
+
+      // Periksa status koneksi internet
+      var online = navigator.onLine;
+
+      if (!online) {
+        // Tampilkan pesan jika tidak terhubung
+        offlineMessage.style.display = 'block';
+        iframe.style.display = 'none';
+      }
+    });
+
+    // Periksa status koneksi saat memuat halaman
+    var online = navigator.onLine;
+
+    if (!online) {
+      // Tampilkan pesan jika tidak terhubung
+      offlineMessage.style.display = 'block';
+      iframe.style.display = 'none';
+    }
+  </script>
+<script>
+        // Mendapatkan parameter URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const file = urlParams.get('b4x');
+
+        // Mengganti nilai src iframe
+        if (file) {
+            const iframe = document.getElementById('vidio');
+            iframe.src = file;
+        }
+    </script>
+  <style>
+    @keyframes borderColorChange {
+        0% { border-color: white; }
+        100% { border-color: #25D366; }
+    }
+</style>
+  
+  
+ <a href="https://whatsapp.com/channel/0029Va6V441BqbrA2NZpkH2z" target="_blank" 
+       style="position: absolute; top: 10px; left: 10px; padding: 4px 9px; 
+              border: 2px solid white; text-decoration: none; 
+              color: white; font-weight: bold; font-size: 12px; 
+              background: rgba(26, 26, 26, 0.5); 
+              box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+              text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8); /* Black shadow for text */
+              animation: borderColorChange 0.6s infinite alternate;">
+        &nbsp; JOIN US &nbsp;
+    </a>
+
+
+  <a href="javascript:document.location.reload();" onclick="window.open('https://whatsapp.com/channel/0029Va6V441BqbrA2NZpkH2z'); return false;" target="_blank">
+    <span style="position:absolute;z-index: 10; top:10px; right:70px; height:20px; width:55px; ">
+        
+        <img src="https://i.postimg.cc/DwHRs3xd/New-Project-18-55-C22-AF.png" alt="Logo" style="height: 40px; width: 100px;"> 
+        
+        
+    </span>
+</a>
+
+
+</script>
+</body>
+</html>
+
+
+
+</body>
