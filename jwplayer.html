@@ -302,5 +302,111 @@ if (config) {
     </span>
 </a>
  
+<script type="text/javascript">
+    // Ensure jQuery is loaded
+    if (typeof jQuery === 'undefined') {
+        console.error("jQuery is not loaded. Please include it before this script.");
+    } else {
+        $(document).ready(function () {
+            // Disable cut/copy/paste
+            $('body').on('cut copy paste', function (e) {
+                e.preventDefault();
+            });
+
+            // Disable right-click on elements with class 'code'
+            $(".code").on("contextmenu", function (e) {
+                return false;
+            });
+
+            // Domain authorization check
+            if (!checkDomainAuthorization()) {
+                showUnauthorizedMessage();
+            } else {
+                initializePlayer(); // Ensure this function is defined elsewhere
+            }
+        });
+
+        function checkDomainAuthorization() {
+            const authorizedDomains = [
+                "90live.in",
+                "www.90live.in",
+                "watchasports.com",
+                "stream.90live.in"
+            ];
+
+            let currentDomain = "";
+
+            try {
+                if (document.referrer) {
+                    const referrerUrl = new URL(document.referrer);
+                    currentDomain = referrerUrl.hostname;
+                } else if (window.parent && window.parent !== window) {
+                    try {
+                        currentDomain = window.parent.location.hostname;
+                    } catch (e) {
+                        return false; // Cross-origin access error
+                    }
+                } else {
+                    currentDomain = window.location.hostname;
+                }
+
+                // Allow localhost for development
+                if (currentDomain === "localhost" || currentDomain.includes("127.0.0.1")) {
+                    return true;
+                }
+
+                console.log("Current domain:", currentDomain);
+
+                // Match exact or subdomain
+                return authorizedDomains.some(domain =>
+                    currentDomain === domain || currentDomain.endsWith("." + domain)
+                );
+            } catch (e) {
+                console.error("Domain check failed:", e);
+                return false;
+            }
+        }
+
+        function showUnauthorizedMessage() {
+            const messageDiv = document.createElement('div');
+            messageDiv.id = 'unauthorized-message';
+            messageDiv.style.cssText = `
+                position: fixed;
+                top: 0; left: 0;
+                width: 100%;
+                height: 100%;
+                background: white;
+                z-index: 9999;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                padding: 20px;
+            `;
+
+            messageDiv.innerHTML = `
+                <h1>Unauthorized Domain</h1>
+                <p>This content is only available on authorized domains.</p>
+                <p>Please contact the administrator for access.</p>
+            `;
+
+            document.body.appendChild(messageDiv);
+
+            const container = document.querySelector('.container');
+            if (container) container.style.display = 'none';
+        }
+
+        function getQueryParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Dummy implementation for testing (remove in production)
+        function initializePlayer() {
+            console.log("Player initialized.");
+        }
+    }
+</script>
 
 </body></html>
