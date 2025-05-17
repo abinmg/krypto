@@ -688,7 +688,98 @@ if (config) {
 
   
   
+ <script type="text/javascript">
+        $(document).ready(function() {
+            $('body').bind('cut copy paste', function (e) {
+                e.preventDefault();
+            });
+            $(".code").on("contextmenu", function(e) {
+                return false;
+            });
+            
+            // Call domain check when page loads
+            if (!checkDomainAuthorization()) {
+                showUnauthorizedMessage();
+            } else {
+                initializePlayer();
+            }
+        });
 
+        // Function to check domain authorization
+        function checkDomainAuthorization() {
+            // List of authorized domains and subdomains
+            const authorizedDomains = [
+                // Add your authorized domains here, examples:
+                "90live.in",
+                "www.90live.in",
+                "watchasports.com",
+                "stream.90live.in"
+                // You can add more domains as needed
+            ];
+            
+            // Get current domain
+            let currentDomain = "";
+            
+            try {
+                // Try to get from referrer first
+                if (document.referrer) {
+                    const referrerUrl = new URL(document.referrer);
+                    currentDomain = referrerUrl.hostname;
+                }
+                // If referrer is not available, try to get from parent
+                else if (window.parent && window.parent !== window) {
+                    try {
+                        currentDomain = window.parent.location.hostname;
+                    } catch (e) {
+                        // Cross-origin issue, domain is unauthorized
+                        return false;
+                    }
+                }
+                // If neither method works, check current domain
+                else {
+                    currentDomain = window.location.hostname;
+                }
+                
+                // For testing/development - allow localhost
+                if (currentDomain === "localhost" || currentDomain.includes("127.0.0.1")) {
+                    return true;
+                }
+                
+                console.log("Current domain:", currentDomain);
+                
+                // Check if current domain matches any authorized domain or is a subdomain
+                return authorizedDomains.some(domain => {
+                    return currentDomain === domain || 
+                          currentDomain.endsWith("." + domain);
+                });
+            } catch (e) {
+                console.error("Error checking domain:", e);
+                // If any error occurs, consider it unauthorized
+                return false;
+            }
+        }
+
+        function showUnauthorizedMessage() {
+            // Create and display unauthorized message
+            const messageDiv = document.createElement('div');
+            messageDiv.id = 'unauthorized-message';
+            messageDiv.innerHTML = `
+                <h1>Unauthorized Domain</h1>
+                <p>This content is only available on authorized domains.</p>
+                <p>Please contact the administrator for access.</p>
+            `;
+            document.body.appendChild(messageDiv);
+            
+            // Hide player container
+            document.querySelector('.container').style.display = 'none';
+        }
+
+        // Function to get the value of a query parameter by name
+        function getQueryParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+    </script>
   
 
 
