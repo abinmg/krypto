@@ -303,38 +303,4 @@ if (config) {
 </a>
  
 
-  <div id="iframe-container"></div>
-
-<script type="text/javascript">
-// Set the only allowed domain
-const allowedDomain = "live.b4xsports.online";
-
-// Set the allowed path on that domain (change this as needed)
-const allowedPath = "/stream.html";
-
-// Full iframe URL
-const iframeURL = "https://live.b4xsports.online/stream.html";
-
-// Validate before creating iframe
-try {
-  const url = new URL(iframeURL);
-  const isAllowed = (url.hostname === allowedDomain && url.pathname === allowedPath);
-
-  if (isAllowed) {
-    const iframe = document.createElement("iframe");
-    iframe.src = iframeURL;
-    iframe.width = "100%";
-    iframe.height = "400";
-    iframe.frameBorder = "0";
-    iframe.allowFullscreen = true;
-    document.getElementById("iframe-container").appendChild(iframe);
-  } else {
-    document.getElementById("iframe-container").innerHTML = "<p>🚫 Not an allowed source.</p>";
-  }
-} catch (e) {
-  document.getElementById("iframe-container").innerHTML = "<p>🚫 Invalid URL.</p>";
-}
-</script>
-
-
 </body></html>
