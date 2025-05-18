@@ -305,9 +305,7 @@ if (config) {
 <script type="text/javascript">
 (function () {
     const authorizedDomains = [
-        "www.b4xsports.online",
-        "live.b4xsports.online",
-        "b4xsports.online"
+        "live.b4xsports.online" // Only allow this domain
     ];
 
     const currentDomain = window.location.hostname;
@@ -316,9 +314,7 @@ if (config) {
     const isLocalhost = currentDomain === "localhost" || currentDomain.startsWith("127.0.0.1");
 
     // Check if current domain is allowed
-    const isAuthorized = authorizedDomains.some(domain =>
-        currentDomain === domain || currentDomain.endsWith("." + domain)
-    );
+    const isAuthorized = authorizedDomains.includes(currentDomain);
 
     if (!isAuthorized && !isLocalhost) {
         // BLOCK unauthorized domains
@@ -375,6 +371,7 @@ if (config) {
     }
 })();
 </script>
+
 
 
 </body></html>
