@@ -312,75 +312,7 @@ if (config) {
     </span>
 </a>
  
-<script type="text/javascript">
-(function () {
-    const authorizedDomains = [
-        "live.b4xsports.online" // Only allow this domain
-    ];
 
-    const currentDomain = window.location.hostname;
-
-    // Allow localhost for development
-    const isLocalhost = currentDomain === "localhost" || currentDomain.startsWith("127.0.0.1");
-
-    // Check if current domain is allowed
-    const isAuthorized = authorizedDomains.includes(currentDomain);
-
-    if (!isAuthorized && !isLocalhost) {
-        // BLOCK unauthorized domains
-        document.addEventListener("DOMContentLoaded", function () {
-            const messageDiv = document.createElement('div');
-            messageDiv.id = 'unauthorized-message';
-            messageDiv.style.cssText = `
-                position: fixed;
-                top: 0; left: 0;
-                width: 100%;
-                height: 100%;
-                background: white;
-                z-index: 9999;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-                padding: 20px;
-            `;
-
-            messageDiv.innerHTML = `
-                <h1>Unauthorized Domain</h1>
-                <p>This content is only available on authorized domains.</p>
-                <p>Current domain: <strong>${currentDomain}</strong></p>
-            `;
-
-            document.body.innerHTML = ''; // Remove all existing content
-            document.body.appendChild(messageDiv);
-        });
-
-        return; // Stop script execution
-    }
-
-    // Proceed only if authorized
-    document.addEventListener("DOMContentLoaded", function () {
-        // Block cut, copy, paste
-        document.body.addEventListener('cut', e => e.preventDefault());
-        document.body.addEventListener('copy', e => e.preventDefault());
-        document.body.addEventListener('paste', e => e.preventDefault());
-
-        // Disable right-click on elements with class 'code'
-        const codeBlocks = document.querySelectorAll('.code');
-        codeBlocks.forEach(el => {
-            el.addEventListener('contextmenu', e => e.preventDefault());
-        });
-
-        // Call player initialization
-        initializePlayer(); // <-- Make sure this function exists
-    });
-
-    function initializePlayer() {
-        console.log("Player initialized"); // Replace with actual logic
-    }
-})();
-</script>
 
 
 
