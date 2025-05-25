@@ -1,0 +1,96 @@
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width" />
+    <meta name="author" content="LiveCricHd Embed" />
+    <meta name="designer" content="LiveCricHd " />
+    <meta name="description" content="Join Telegram Channel-@livecrichdofficial">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
+    <link href="https://cdn.jsdelivr.net/gh/halfmoonui/halfmoon@1.0.4/css/halfmoon.min.css" rel="stylesheet" />
+    <title>B4X-Player</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="https://cdn.plyr.io/3.6.2/plyr.polyfilled.js"></script>
+
+  <style>
+    html {
+      font-family: Poppins;
+      background: #000;
+      margin: 0;
+      padding: 0
+    }
+
+    
+
+    .plyr__video-wrapper::before {
+        position: absolute;
+        top: 20px;
+        right: 80px;
+        z-index: 20;
+        content: '';
+        height: 100px;
+        width: 100px;
+        background: url('https://i.postimg.cc/DwHRs3xd/New-Project-18-55-C22-AF.png') no-repeat;
+        background-size: 100px auto, auto;
+    }
+  </style>
+
+  
+
+    <script>
+
+document.addEventListener("DOMContentLoaded", () => {
+  const _0x25d50b = new URLSearchParams(window.location.search);
+  const _0x122a13 = _0x25d50b.get("b4x");
+  if (!_0x122a13) {
+    console.error("No m3u8 URL provided");
+    return;
+  }
+  const _0x402926 = document.querySelector("video");
+  const _0x1ac096 = document.createElement("source");
+  _0x1ac096.src = _0x122a13;
+  _0x1ac096.type = "application/x-mpegURL";
+  _0x402926.appendChild(_0x1ac096);
+  const _0x331d3f = {};
+  if (Hls.isSupported()) {
+    var _0x124559 = {
+      'maxMaxBufferLength': 0x64
+    };
+    const _0x39915c = new Hls(_0x124559);
+    _0x39915c.loadSource(_0x122a13);
+    _0x39915c.on(Hls.Events.MANIFEST_PARSED, function (_0x3dc3ae, _0x1d70af) {
+      const _0x140f92 = _0x39915c.levels.map(_0x2e2713 => _0x2e2713.height);
+      _0x331d3f.quality = {
+        'default': _0x140f92[0],
+        'options': _0x140f92,
+        'forced': true,
+        'onChange': _0x4fdbc1 => {
+          _0x39915c.levels.forEach((_0x2ca1ae, _0x268bb0) => {
+            if (_0x2ca1ae.height === _0x4fdbc1) {
+              _0x39915c.currentLevel = _0x268bb0;
+            }
+          });
+        }
+      };
+      new Plyr(_0x402926, _0x331d3f);
+    });
+    _0x39915c.attachMedia(_0x402926);
+    window.hls = _0x39915c;
+  } else {
+    new Plyr(_0x402926, _0x331d3f);
+  }
+});
+var currentDomain = window.location.hostname;
+    </script>
+</head>
+<body class="dark-mode with-custom-scrollbars with-custom-css-scrollbars">
+    <video id="player" controls preload="metadata" poster="https://i.postimg.cc/2SvNpkFK/New-Project-81-38-FC63-E.png" class="plyr">
+    </video>
+</body>
+  <a href="https://www.whatsapp.com/channel/0029Va6V441BqbrA2NZpkH2z" target="_blank">
+<span style="position: absolute; z-index: 100; top: 30px; left: 10px; height: 30px; width: 100px; color: rgb(204, 204, 204); border: 2px solid rgb(204, 204, 204); padding: 1px 0px; border-radius: 2px; text-align: center;">
+Join us
+</span>
+</a>
+</html>
