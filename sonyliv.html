@@ -1,0 +1,291 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Sports Stream</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .instruction-box {
+            font-size: 14px;
+            background-color: #fffae5;
+            border: 2px solid #ffce00;
+            padding: 8px;
+            margin: 10px auto;
+            width: 90%;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        #playerContainer {
+            width: 100%;
+            max-width: 100%;
+            height: 250px;
+            background-color: black;
+            margin: 10px auto;
+            position: relative;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        #playlist {
+            width: 90%;
+            margin: 10px auto;
+        }
+
+        .match-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .match-button {
+            padding: 8px 12px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: white;
+            color: black;
+            flex: 1;
+            text-align: left;
+        }
+
+        .external-button {
+            padding: 5px 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: white;
+            color: orange;
+            margin-left: 5px;
+        }
+
+        .whatsapp-button {
+            display: inline-block;
+            background-color: #25D366;
+            color: white;
+            padding: 15px 12px;
+            font-size: 14px;
+            text-decoration: none;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+
+        /* Hide Ads */
+        iframe[src*="ads"], 
+        iframe[id*="ads"],
+        iframe[name*="ads"],
+        iframe[class*="ads"],
+        div[id*="ads"],
+        div[class*="ads"],
+        a[href*="ads"],
+        ins,
+        .ad-banner,
+        .ad-container,
+        .adsbygoogle,
+        .ad-unit,
+        .ad-wrapper,
+        .ad-popup,
+        .ad-overlay {
+            display: none !important;
+            visibility: hidden !important;
+            height: 0 !important;
+            width: 0 !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        /* Prevent ad overlays */
+        body > *:not(#playerContainer):not(#playlist):not(.instruction-box):not(.whatsapp-button) {
+            z-index: 99999 !important;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+<div class="instruction-box">
+    Click on a match name to play. If it stops, refresh or try MX/VLC by clicking on (🔗).
+</div>
+
+<div id="playerContainer">
+    <iframe id="phpPlayer" allow="autoplay"></iframe>
+</div>
+
+<div id="playlist"></div>
+
+<a href="https://whatsapp.com/channel/0029Vb32mMt23n3ZBynqbY2l" class="whatsapp-button">
+    Join WhatsApp Group for highlights
+</a>
+
+<script>
+    const matches =[
+        {
+            "name": "Finland x Netherlands",
+            "link": "https://sportzonline.si/channels/hd/hd3.php",
+            "m3u8": "https://dai.google.com/linear/hls/event/8cov9tHQRj26xm-Qz6uWzQ/master.m3u8"
+        },
+        
+      
+    ];
+
+    function loadVideo(url) {
+        const playerFrame = document.getElementById("phpPlayer");
+        playerFrame.src = url;
+        
+        // Additional protection against iframe redirects
+        playerFrame.onload = function() {
+            try {
+                if (playerFrame.contentWindow.location.href !== url && 
+                    !playerFrame.contentWindow.location.href.includes(url)) {
+                    playerFrame.src = url;
+                }
+            } catch (e) {
+                // Cross-origin error, which is expected
+            }
+        };
+    }
+
+    function openExternal(m3u8, php) {
+        const streamURL = m3u8 ? m3u8 : php;
+        window.location.href = `intent:${streamURL}#Intent;action=android.intent.action.VIEW;type=video/mp4;end;;`;
+    }
+
+    function renderMatches() {
+        const playlistDiv = document.getElementById("playlist");
+        playlistDiv.innerHTML = "";
+
+        matches.forEach(match => {
+            const matchItem = document.createElement("div");
+            matchItem.classList.add("match-item");
+
+            const matchButton = document.createElement("button");
+            matchButton.classList.add("match-button");
+            matchButton.textContent = match.name;
+            matchButton.onclick = () => loadVideo(match.link);
+
+            const externalButton = document.createElement("button");
+            externalButton.classList.add("external-button");
+            externalButton.textContent = "🔗";
+            externalButton.onclick = () => openExternal(match.m3u8, match.link);
+
+            matchItem.appendChild(matchButton);
+            matchItem.appendChild(externalButton);
+            playlistDiv.appendChild(matchItem);
+        });
+    }
+
+    // Enhanced ad blocking
+    function blockAds() {
+        // Block known ad domains
+        const adDomains = [
+            'doubleclick.net',
+            'googleads.com',
+            'googlesyndication.com',
+            'adservice.google.com',
+            'adsafeprotected.com',
+            'adnxs.com',
+            'amazon-adsystem.com',
+            'taboola.com',
+            'outbrain.com',
+            'pubmatic.com',
+            'openx.net'
+        ];
+
+        // MutationObserver to detect and block dynamically loaded ads
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                mutation.addedNodes.forEach(function(node) {
+                    if (node.nodeType === 1) { // Element node
+                        // Check iframes
+                        if (node.tagName === 'IFRAME') {
+                            const src = node.getAttribute('src') || '';
+                            if (adDomains.some(domain => src.includes(domain))) {
+                                node.remove();
+                                return;
+                            }
+                        }
+                        
+                        // Check scripts
+                        if (node.tagName === 'SCRIPT') {
+                            const src = node.getAttribute('src') || '';
+                            if (adDomains.some(domain => src.includes(domain))) {
+                                node.remove();
+                                return;
+                            }
+                        }
+                        
+                        // Check divs with ad classes
+                        const adClasses = ['ad', 'ads', 'advert', 'advertisement', 'ad-container'];
+                        if (adClasses.some(adClass => node.classList.contains(adClass))) {
+                            node.remove();
+                            return;
+                        }
+                    }
+                });
+            });
+        });
+
+        // Start observing
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+
+        // Periodic cleanup
+        setInterval(() => {
+            document.querySelectorAll('iframe, div, script, img, a').forEach(element => {
+                const src = element.getAttribute('src') || '';
+                const href = element.getAttribute('href') || '';
+                const id = element.getAttribute('id') || '';
+                const className = element.getAttribute('class') || '';
+                
+                if (adDomains.some(domain => 
+                    src.includes(domain) || 
+                    href.includes(domain) ||
+                    id.includes('ad') ||
+                    className.includes('ad')
+                )) {
+                    element.remove();
+                }
+            });
+        }, 1000);
+    }
+
+    // Block window redirects
+    window.onbeforeunload = function() {
+        return "Are you sure you want to leave?";
+    };
+
+    // Block popups
+    window.open = function() {
+        return null;
+    };
+
+    window.onload = function() {
+        renderMatches();
+        loadVideo(matches[0].link);
+        blockAds();
+    };
+</script>
+
+</body>
+</html>
