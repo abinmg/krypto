@@ -4,6 +4,7 @@
         'www.b4xsports.xyz',
         'b4xsports.xyz',
         'live.b4xsports.online', //  subdomain allowed
+        'b4xsports.90live.in'
         'stream.90live.in'
 
     ];
