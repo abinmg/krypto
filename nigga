@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Player</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <!-- Disable Dev Tools -->
+  <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
+  <!-- Prevent Copy, Cut, Paste, Right-click -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://fuckyouniggercopy.github.io/play.css">
+  <script>
+    $(document).ready(function () {
+      $('body').bind('cut copy paste', function (e) {
+        e.preventDefault();
+      });
+      $(".code").on("contextmenu", function (e) {
+        return false;
+      });
+    });
+  </script>
+  <!-- JW Player -->
+  <script src="//ssl.p.jwpcdn.com/player/v/8.26.0/jwplayer.js"></script>
+  <script>jwplayer.key = "XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo";</script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background-color: #000;
+    }
+    #b4x {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+<div id="b4x"></div>
+<script>
+  function getQueryParam(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+  }
+  
+  const streamId = getQueryParam('get');
+  let streamUrl;
+  
+  if (streamId) {
+    // Multiple layers of obfuscation
+    const baseEnc = btoa('dca-co-live-gcr.gcdn.co');
+    const pathEnc = btoa('tv25f/stream.mpd');
+    const paramEnc = btoa('channel=2650&outlet=dazn-row&plang=en');
+    
+    const baseUrl = atob(baseEnc);
+    const path = atob(pathEnc);
+    const params = atob(paramEnc);
+    
+    streamUrl = https://${baseUrl}/${streamId}/${path}?${params};
+  } else {
+    const fallbackEnc = 'aHR0cHM6Ly9kY2EtY28tbGl2ZS1nY3IuZ2Nkbi5jby8xNmo5ZjgybjljZGQ4MWF6MWxyMXh4bHozaC90djI1Zi9zdHJlYW0ubXBkP2NoYW5uZWw9MjY1MSZvdXRsZXQ9ZGF6bi1yb3cmcGxhbmc9ZW4=';
+    streamUrl = atob(fallbackEnc);
+  }
+  
+  jwplayer("b4x").setup({
+    file: streamUrl,
+    controls: true,
+    image: "",
+    title: "",
+    logo: {
+      file: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQGbgHbZ_TtUyVHjqNTfmQD05FkyoFxZyx3g&s",
+      link: "",
+      hide: false,
+      position: "control-bar"
+    },
+    width: "100%",
+    height: "100%",
+    stretching: '',
+    autostart: false,
+    androidhls: true
+  });
+</script>
+  
+ <a href="https://whatsapp.com/channel/0029VafyPeMADTOJIa3URu3u" target="_blank">
+<span style="position: absolute; z-index: 100; top: 6px; left: 5px; height: 30px; width: 100px; color: rgb(204, 204, 204); border: 2px solid rgb(204, 204, 204); padding: 1px 0px; border-radius: 2px; text-align: center;">
+Join us
+</span>
+</a>
+</body>
+</html>
